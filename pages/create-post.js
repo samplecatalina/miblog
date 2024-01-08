@@ -40,7 +40,7 @@ function CreatePost() {
 
     return (
         <div>
-            <h1 className='text-3xl font-semibold 
+            <h1 className='text-sky-400 text-3xl font-semibold 
             tracking-wide mt-6'>Create New Post</h1>
             <input
                 onChange={onChange}

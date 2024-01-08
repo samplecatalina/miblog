@@ -1,6 +1,6 @@
 import { API, a } from 'aws-amplify'
 import { useRouter } from 'next/router'
-import ReactMarkDown from 'react-markdown'
+import ReactMarkdown from 'react-markdown'
 import '../../configureAmplify'
 import { listPosts, getPost } from '../../src/graphql/queries'
 
@@ -17,7 +17,9 @@ export default function Post({ post }) {
             <p className='text-sm font-light my-4'>
                 {post.username}
             </p>
-            <ReactMarkDown className='prose' children={post.content} />
+            <div className='mt-8'>
+                <p ReactMarkdown className='prose'>{post.content}</p>
+            </div>
         </div>
     )
 }
@@ -41,6 +43,7 @@ export async function getStaticProps({ params }) {
     return {
         props: {
             post: postData.data.getPost
-        }
+        },
+        revalidate: 1
     }
 }

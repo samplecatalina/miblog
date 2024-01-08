@@ -14,8 +14,7 @@ function Profile() {
     if (!user) return null;
     return (
         <div>
-            <h1 className="text-3xl front-semibold tracking-wide
-            mt-6">
+            <h1 className="text-sky-400 text-6xl font-bold">
                 Profile
             </h1>
             <h1 className="font-medium text-gray-500 my-2">Username: {user.username}</h1>

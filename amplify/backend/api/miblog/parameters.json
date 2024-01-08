@@ -1,5 +1,12 @@
 {
   "AppSyncApiName": "miblog",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthModeLastUpdated": "2024-01-08T05:29:19.383Z",
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authmiblog7fc46590",
+      "Outputs.UserPoolId"
+    ]
+  }
 }

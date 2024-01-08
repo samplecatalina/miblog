@@ -1,13 +1,30 @@
 {
   "api": {
     "miblog": {
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "miblog7fc46590"
+        }
+      ],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authmiblog7fc46590"
+              }
+            }
+          ],
           "defaultAuthentication": {
             "apiKeyConfig": {
-              "apiKeyExpirationDays": 7
+              "apiKeyExpirationDate": "2025-01-07T05:29:04.454Z",
+              "apiKeyExpirationDays": 365,
+              "description": "public api key for miblog"
             },
             "authenticationType": "API_KEY"
           }

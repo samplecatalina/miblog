@@ -3,6 +3,7 @@ import { Auth, API } from 'aws-amplify';
 import { postsByUsername } from '../src/graphql/queries';
 import Link from 'next/link';
 import Moment from 'moment';
+import { deletePost as deletePostMutation } from '../src/graphql/mutations';
 
 export default function MyPosts() {
     const [posts, setPosts] = useState([]);
@@ -19,6 +20,16 @@ export default function MyPosts() {
         });
         setPosts(postData.data.postsByUsername.items);
     }
+
+    async function deletePost(id) {
+        await API.graphql({
+            query: deletePostMutation,
+            variables: { input: { id } },
+            authMode: 'AMAZON_COGNITO_USER_POOLS'
+        });
+        fetchPosts();
+    }
+
     return (
         <div>
             {posts.map((post, index) => (

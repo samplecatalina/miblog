@@ -18,7 +18,7 @@ export default function Post({ post }) {
                 {post.username}
             </p>
             <div className='mt-8'>
-                <p ReactMarkdown className='prose'>{post.content}</p>
+                <ReactMarkdown className='prose' children={post.content}/>
             </div>
         </div>
     )

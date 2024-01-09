@@ -1,6 +1,6 @@
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import { useState, useRef, React } from 'react'
-import { API } from 'aws-amplify'
+import { API, Storage } from 'aws-amplify'
 import { useRouter } from 'next/router'
 import { v4 as uuid } from 'uuid'
 import { createPost } from '../src/graphql/mutations'
@@ -19,6 +19,8 @@ function CreatePost() {
     const [post, setPost] = useState(initialState)
     const { title, content } = post
     const router = useRouter()
+    const [image, setImage] = useState(null);
+    const imageFileInput = useRef(null);
 
     function onChange(e) {
         setPost(() => ({ ...post, [e.target.name]: e.target.value }))
@@ -29,6 +31,13 @@ function CreatePost() {
         // const post = { ...post, title, content }
         const id = uuid()
         post.id = id
+
+        if (image) {
+            const filename = `${image.name}_${uuid()}`;
+            post.coverImage = filename;
+            await Storage.put(filename, image);
+        }
+
         await API.graphql({
             query: createPost,
             variables: { input: post },
@@ -36,6 +45,16 @@ function CreatePost() {
         })
         router.push(`/posts/${id}`)
         // setPost(initialState)
+    }
+
+    async function uploadImage() {
+        imageFileInput.current.click();
+    }
+
+    function handleChange(e) {
+        const fileUploaded = e.target.files[0];
+        if (!fileUploaded) return;
+        setImage(fileUploaded);
     }
 
     return (
@@ -52,9 +71,26 @@ function CreatePost() {
                 text-gray-500 placeholder-gray-500 y-2'
             />
 
+            {image && <img src={URL.createObjectURL(image)} className='my-4' />}
+
             <SimpleMDE 
             value={post.content} 
             onChange={(value) => setPost({ ...post, content: value })} />
+
+            <input
+                    type='file'
+                    ref={imageFileInput}
+                    className='absolute w-0 h-0'
+                    onChange={handleChange}
+                />
+                <button
+                    type='button'
+                    className='bg-green-600 text-white 
+                    font-semibold px-8 py-2 rounded-lg mr-2'
+                    onClick={uploadImage}
+                >
+                    Upload Cover Image
+                </button>
 
             <button
                 type='button'
@@ -63,7 +99,7 @@ function CreatePost() {
                 onClick={createNewPost}
             >
                 Create Post
-            </button>
+            </button>{"  "}
         </div>
     )
 }

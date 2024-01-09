@@ -1,10 +1,25 @@
-import { API, a } from 'aws-amplify'
+import { API, Storage } from 'aws-amplify'
 import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
 import ReactMarkdown from 'react-markdown'
 import '../../configureAmplify'
 import { listPosts, getPost } from '../../src/graphql/queries'
 
 export default function Post({ post }) {
+    const [coverImage, setCoverImage] = useState(null);
+    
+
+    useEffect(() => {
+        updateCoverImage();
+    }, []);
+
+    async function updateCoverImage() {
+        if (post.coverImage) {
+            const imageKey = await Storage.get(post.coverImage);
+            setCoverImage(imageKey);
+        }
+    }
+
     const router = useRouter()
     if (router.isFallback) {
         return <div>Loading...</div>
@@ -14,6 +29,9 @@ export default function Post({ post }) {
             <h1 className='text-sky-400 text-5xl mt-4 font-semibold tracking-wide'>
                 {post.title}
             </h1>
+
+            {coverImage && <img src={coverImage} className='mt4' />}
+            
             <p className='text-sky-400 text-sm font-light my-4'>
                 {post.username}
             </p>

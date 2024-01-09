@@ -17,6 +17,9 @@
       },
       "auth": {
         "miblog7fc46590": {}
+      },
+      "storage": {
+        "postimages": {}
       }
     }
   }

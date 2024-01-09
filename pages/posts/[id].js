@@ -11,13 +11,13 @@ export default function Post({ post }) {
     }
     return (
         <div>
-            <h1 className='text-5xl mt-4 font-semibold tracking-wide'>
+            <h1 className='text-sky-400 text-5xl mt-4 font-semibold tracking-wide'>
                 {post.title}
             </h1>
-            <p className='text-sm font-light my-4'>
+            <p className='text-sky-400 text-sm font-light my-4'>
                 {post.username}
             </p>
-            <div className='mt-8'>
+            <div className='text-sky-400 mt-8'>
                 <ReactMarkdown className='prose' children={post.content}/>
             </div>
         </div>

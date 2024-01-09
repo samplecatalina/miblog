@@ -10,12 +10,18 @@ export const getPost = /* GraphQL */ `
       username
       coverImage
       comments {
+        items {
+          id
+          message
+          postID
+          createdAt
+          updatedAt
+          createdBy
+        }
         nextToken
-        __typename
       }
       createdAt
       updatedAt
-      __typename
     }
   }
 `;
@@ -32,12 +38,20 @@ export const listPosts = /* GraphQL */ `
         content
         username
         coverImage
+        comments {
+          items {
+            id
+            message
+            postID
+            createdAt
+            updatedAt
+            createdBy
+          }
+        }
         createdAt
         updatedAt
-        __typename
       }
       nextToken
-      __typename
     }
   }
 `;
@@ -62,12 +76,13 @@ export const postsByUsername = /* GraphQL */ `
         content
         username
         coverImage
+        comments {
+          nextToken
+        }
         createdAt
         updatedAt
-        __typename
       }
       nextToken
-      __typename
     }
   }
 `;
@@ -82,15 +97,16 @@ export const getComment = /* GraphQL */ `
         content
         username
         coverImage
+        comments {
+          nextToken
+        }
         createdAt
         updatedAt
-        __typename
       }
       postID
       createdAt
       updatedAt
       createdBy
-      __typename
     }
   }
 `;
@@ -104,43 +120,21 @@ export const listComments = /* GraphQL */ `
       items {
         id
         message
+        post {
+          id
+          title
+          content
+          username
+          coverImage
+          createdAt
+          updatedAt
+        }
         postID
         createdAt
         updatedAt
         createdBy
-        __typename
       }
       nextToken
-      __typename
-    }
-  }
-`;
-export const commentsByPostID = /* GraphQL */ `
-  query CommentsByPostID(
-    $postID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelCommentFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    commentsByPostID(
-      postID: $postID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        message
-        postID
-        createdAt
-        updatedAt
-        createdBy
-        __typename
-      }
-      nextToken
-      __typename
     }
   }
 `;

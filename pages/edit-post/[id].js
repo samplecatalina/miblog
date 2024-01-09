@@ -20,14 +20,18 @@ function EditPost() {
   const { id } = router.query;
 
   useEffect(() => {
+
     fetchPost();
+    
     async function fetchPost() {
       if (!id) return;
       const postData = await API.graphql({
         query: getPost,
         variables: { id },
       });
+      
       setPost(postData.data.getPost);
+      
       if (postData.data.getPost.coverImage) {
         updateCoverImage(postData.data.getPost.coverImage);
       }
@@ -58,12 +62,15 @@ function EditPost() {
 
   const { title, content } = post;
   async function updateCurrentPost() {
+    
     if (!title || !content) return;
+    
     const postUpdated = {
       id,
       content,
       title
     };
+
     if (coverImage && localImage) {
       const fileName = `${coverImage.name}_${uuid()}`;
       postUpdated.coverImage = fileName;
@@ -79,7 +86,7 @@ function EditPost() {
   }
   return (
     <div>
-      <h1 className='text-3xl font-semibold tracking-wide mt-6 mb-2'>
+      <h1 className='text-sky-400 text-3xl font-semibold tracking-wide mt-6 mb-2'>
         Edit post
       </h1>
 
@@ -111,7 +118,7 @@ function EditPost() {
         onClick={uploadImage}
       >
         Upload Cover Image
-      </button>
+      </button>"  "
 
       <button
         className='mb-4 bg-blue-600 text-white font-semibold px-8 

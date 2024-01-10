@@ -1,7 +1,7 @@
 # MiBlog: Full-Stack Next.js Online Blog Application
 
 ## Technical Digest
-- Constructed a full-stack Next.js notes application, hosted on AWS Amplify, and deployed on Heroku.
+- Deployed a serverless GraphQL and Next.js based scalable online blogging application on the AWS Cloud.
 
 - Implemented front-end by Next.js with Tailwind CSS, coupling with the AWS AppSync-managed GraphQL API.
 

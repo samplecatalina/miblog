@@ -1,12 +1,14 @@
 # MiBlog: Full-Stack Next.js Online Blog Application
 
 ## Technical Digest
-- Deployed a serverless GraphQL and Next.js based scalable online blogging application on the AWS Cloud.
+- Deployed a serverless GraphQL-and-Next.js-based scalable online blogging application on the AWS Cloud.
 
 - Implemented front-end by Next.js with Tailwind CSS, coupling with the AWS AppSync-managed GraphQL API.
 
 - Engineered the serverless back-end with DynamoDB, supporting image storing and processing by Amazon S3.
+  
 - Created a Git-based CI/CD workflow through the host environment for continuous deployment on AWS Amplify.
+  
 - Utilized Amazon Cognito to provide authentication service and User Pools/Identity Pools management.
 
 ## Deployment: in local environment
